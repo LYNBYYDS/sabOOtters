@@ -12,12 +12,15 @@ from Card import *
 
 class Player:
     
-    def __init__(self, playername, role, nbCard, index = 0, toolstat = [1, 1, 1]):
+    def __init__(self, playername, age, role, nbCard = 6, index = 0, point = 0, toolstat = [1, 1, 1]):
         
+        self.playername = playername
+        self.age = age
         self.role = role
         self.nbCard = nbCard
         self.index = index
-        self.cardtable = ["NOCD " for x in range(nbCard)]
+        self.point = point
+        self.cardtable = [EmptyCard() for x in range(nbCard)]
         self.table_top = ["          " for x in range(nbCard)]
         self.table_middle = [str(x) + ":      , " for x in range(nbCard)]
         self.table_bottom = ["          " for x in range(nbCard)]
@@ -32,11 +35,21 @@ class Player:
         for x in self.table_bottom:
             print(x, end="")
         print()
-        # for x in range(len(self.table_bottom)):
-    
+        
+    def resetPlayer(self, resetpoint):
+        for index in range(nbCard):
+            self.cardtable[self.index] = EmptyCard()
+            self.table_top[self.index] = "          " 
+            self.table_middle[self.index] = str(self.index) + ":      , "
+            self.table_bottom[self.index] = "          "
+        self.index = 0
+        self.toolstat = [1, 1, 1]
+        if resetpoint:
+            self.point = 0
+        
     def insertCard(self, card):
         if self.index < self.nbCard:
-            self.cardtable[self.index] = card.cardtype
+            self.cardtable[self.index] = card
             self.table_top[self.index] = "   " + card.gettop() + "  "
             self.table_middle[self.index] = str(self.index) + ": " + card.getmiddle() + ", "
             self.table_bottom[self.index] = "   " + card.getbottom() + "  "
@@ -54,7 +67,7 @@ class Player:
                 self.table_middle[index+i] = self.table_middle[index+i+1]
                 self.table_bottom[index+i] = self.table_bottom[index+i+1]
             self.index -= 1
-            self.cardtable[self.index] = "NOCD "
+            self.cardtable[self.index] = EmptyCard()
             self.table_top[self.index] = "          " 
             self.table_middle[self.index] = str(self.index) + ":      , "
             self.table_bottom[self.index] = "          "
@@ -63,60 +76,50 @@ class Player:
             print("index out range")
             return 0
        
-    def changeToolStat(self, toolname, card):
-        if (toolstat[0] == 0 and card.cardtype == "W+"):
+    def changeToolStat(self, toolname, card): # ToolStat LI P W
+        if (toolstat[0] == 0 and (card.cardtype == "Li+" or card.cardtype == "LiP+" or card.cardtype == "LiW+")):
             toolstat[0] = 1
             return 1
-        elif (toolstat[1] == 0 and card.cardtype == "Li+"):
+        elif (toolstat[1] == 0 and (card.cardtype == "P+" or card.cardtype == "LiP+" or card.cardtype == "PW+")):
             toolstat[1] = 1
             return 1
-        elif (toolstat[2] == 0 and card.cardtype == "P+"):
+        elif (toolstat[2] == 0 and (card.cardtype == "W+" or card.cardtype == "LiW+" or card.cardtype == "PW+")):
             toolstat[2] = 1
             return 1
-        elif (toolstat[0] == 0 and card.cardtype == "W+"):
-            toolstat[0] = 1
+        elif (toolstat[0] == 1 and card.cardtype == "Lix" ):
+            toolstat[0] = 0
             return 1
-        elif (toolstat[0] == 0 and card.cardtype == "W+"):
-            toolstat[0] = 1
+        elif (toolstat[1] == 1 and card.cardtype == "Px" ):
+            toolstat[1] = 0
             return 1
+        elif (toolstat[2] == 1 and card.cardtype == "Wx" ):
+            toolstat[2] = 0
+            return 1
+        else:
+            print("error, cant play this cation card tools stat not changed")
+            return 0
         
-       
+    def changePoint(self, point):
+        self.point += point
+    
         
-       
-if self.cardtype == "W+":
-    super().__init__("(DEF)","( W )","(   )")
-elif self.cardtype == "Li+":
-    super().__init__("(DEF)","( L )","(   )")
-elif self.cardtype == "P+":
-    super().__init__("(DEF)","( P )","(   )")
-elif self.cardtype == "Wx":
-    super().__init__("(ATT)","( W )","(   )")
-elif self.cardtype == "Lix":
-    super().__init__("(ATT)","( L )","(   )")
-elif self.cardtype == "Px":
-    super().__init__("(ATT)","( P )","(   )")
+# test code
+        
+    
+# card1 = PathCard("URDL+")
+# card2 = PathCard("URD +")
+# card3 = PathCard("UR L+")
+# card4 = PathCard("UR  +")
 
-# Rock card
-elif self.cardtype == "RoF":
-    super().__init__("(   )","(RoF)","(   )")
+# player1 = Player("titi", 18, "bad", 5)
+# print(player1.index)
+# # print(player1.__dict__)
+# player1.printPlayerCard()
+# player1.insertCard(card1)
+# player1.insertCard(card2)
+# player1.insertCard(card3)
+# player1.insertCard(card4)
+# player1.printPlayerCard()
 
-# Map card
-elif self.cardtype == "MAP":
-    super().__init__("( M )","(MAP)","( P )")       
-card1 = PathCard("URDL+")
-card2 = PathCard("URD +")
-card3 = PathCard("UR L+")
-card4 = PathCard("UR  +")
-
-player1 = Player("titi", "bad", 5)
-print(player1.index)
-# print(player1.__dict__)
-player1.printPlayerCard()
-player1.insertCard(card1)
-player1.insertCard(card2)
-player1.insertCard(card3)
-player1.insertCard(card4)
-player1.printPlayerCard()
-
-player1.removeCard(1)
-player1.printPlayerCard()
+# player1.removeCard(1)
+# player1.printPlayerCard()
