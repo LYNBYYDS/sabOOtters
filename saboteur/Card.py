@@ -121,45 +121,43 @@ class RoundEndCard(Card):
         # W = wagonnet, Li = lampe de mine, P = pioche de mine
         # + = repair, x = broke
         
-        if self.cardtype == "NU":
+        if self.cardtype == "NU   ":
             super().__init__("(   )","(END)","(   )")
             self.backtop = "( | )"
             self.backmiddle = "(-N )"
             self.backbottom = "(   )"
-        elif self.cardtype == "ND":
+        elif self.cardtype == "ND   ":
             super().__init__("(   )","(END)","(   )")
             self.backtop = "(   )"
             self.backmiddle = "(-N )"
             self.backbottom = "( | )"
-        elif self.cardtype == "G":
+        elif self.cardtype == "G    ":
             super().__init__("(   )","(END)","(   )")
             self.backtop = "( | )"
             self.backmiddle = "(-G-)"
             self.backbottom = "( | )"
     
     def turnCard(self):
-        if self.cardtype == "NU":
+        if self.cardtype == "NU   ":
             self.top = "( | )"
             self.middle = "(-N )"
             self.bottom = "(   )"
-        elif self.cardtype == "ND":
-            super().__init__("(   )","(END)","(   )")
+        elif self.cardtype == "ND   ":
             self.top = "(   )"
             self.middle = "(-N )"
             self.bottom = "( | )"
-        elif self.cardtype == "G":
-            super().__init__("(   )","(END)","(   )")
+        elif self.cardtype == "G   ":
             self.top = "( | )"
             self.middle = "(-G-)"
             self.bottom = "( | )"
             
 class GoldCard(Card):
     def __init__(self, nbGold):
-        if self.nbGold == "1G":
+        if self.nbGold == "1G   ":
             super().__init__("(   )","(1 G)","(   )")
-        elif self.nbGold == "2G":
+        elif self.nbGold == "2G   ":
             super().__init__("(   )","(2 G)","(   )")
-        elif self.nbGold == "3G":
+        elif self.nbGold == "3G   ":
             super().__init__("(   )","(3 G)","(   )")
             
             
