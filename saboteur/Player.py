@@ -25,19 +25,38 @@ class Player:
         self.table_middle = [str(x) + ":      , " for x in range(nbCard)]
         self.table_bottom = ["          " for x in range(nbCard)]
         
+    def printPlayerStat(self):
+        print("player: " + self.playername)
+        print("broken tools: ", end="")
+        if self.toolstat[0] == 1:
+            print("   ", end="")
+        else:
+            print("LI ", end="")
+        if self.toolstat[1] == 1:
+            print("   ", end="")
+        else:
+            print("P  ", end="")
+        if self.toolstat[2] == 1:
+            print("   ", end="")
+        else:
+            print("W  ", end="")
+        print("")
+        self.printPlayerCard()
+        
+        
     def printPlayerCard(self):
         for x in self.table_top:
             print(x, end="")
         print()
         for x in self.table_middle:
             print(x, end="")
-        print(str(self.nbCard+1) + ") Throw away a card")
+        print(str(self.nbCard) + ") Throw away a card")
         for x in self.table_bottom:
             print(x, end="")
         print()
         
     def resetPlayer(self, resetpoint):
-        for index in range(nbCard):
+        for index in range(self.nbCard):
             self.cardtable[self.index] = EmptyCard()
             self.table_top[self.index] = "          " 
             self.table_middle[self.index] = str(self.index) + ":      , "
@@ -60,11 +79,15 @@ class Player:
             return 0
        
     def removeCard(self, index):
+        
+       
         if self.index >= index:
-            for i in range(self.index-index):
+            
+            for i in range(self.index-index-1):
+                
                 self.cardtable[index+i] = self.cardtable[index+i+1]
                 self.table_top[index+i] = self.table_top[index+i+1]
-                self.table_middle[index+i] = self.table_middle[index+i+1]
+                self.table_middle[index+i] = str(index+i) + ": " + self.cardtable[index+i+1].getmiddle() + ", "
                 self.table_bottom[index+i] = self.table_bottom[index+i+1]
             self.index -= 1
             self.cardtable[self.index] = EmptyCard()
@@ -76,27 +99,84 @@ class Player:
             print("index out range")
             return 0
        
-    def changeToolStat(self, toolname, card): # ToolStat LI P W
-        if (toolstat[0] == 0 and (card.cardtype == "Li+" or card.cardtype == "LiP+" or card.cardtype == "LiW+")):
-            toolstat[0] = 1
+    def changeToolStat(self, card): # ToolStat LI P W
+        if self.toolstat[0] == 0 and card.cardtype == "Li+   ":
+            self.toolstat[0] = 1
             return 1
-        elif (toolstat[1] == 0 and (card.cardtype == "P+" or card.cardtype == "LiP+" or card.cardtype == "PW+")):
-            toolstat[1] = 1
+        elif self.toolstat[1] == 0 and card.cardtype == "P+    ":
+            self.toolstat[1] = 1
             return 1
-        elif (toolstat[2] == 0 and (card.cardtype == "W+" or card.cardtype == "LiW+" or card.cardtype == "PW+")):
-            toolstat[2] = 1
+        elif self.toolstat[2] == 0 and card.cardtype == "W+    ":
+            self.toolstat[2] = 1
             return 1
-        elif (toolstat[0] == 1 and card.cardtype == "Lix" ):
-            toolstat[0] = 0
+        elif self.toolstat[0] == 1 and card.cardtype == "Lix   ":
+            self.toolstat[0] = 0
             return 1
-        elif (toolstat[1] == 1 and card.cardtype == "Px" ):
-            toolstat[1] = 0
+        elif self.toolstat[1] == 1 and card.cardtype == "Px    ":
+            self.toolstat[1] = 0
             return 1
-        elif (toolstat[2] == 1 and card.cardtype == "Wx" ):
-            toolstat[2] = 0
+        elif self.toolstat[2] == 1 and card.cardtype == "Wx    ":
+            self.toolstat[2] = 0
             return 1
+        elif card.cardtype == "LiP+  ":
+            if self.toolstat[0] == 0 and self.toolstat[1] == 0:
+                tooltype = input("Enter which tool you want to repair(L for lamp, P for pick): ")
+                if tooltype == "L":
+                    self.toolstat[0] = 1
+                    return 1
+                elif tooltype == "P":
+                    self.toolstat[1] = 1
+                    return 1
+                else:
+                    return 0
+            elif self.toolstat[0] == 0 and self.toolstat[1] == 1:
+                self.toolstat[0] = 1
+                return 1
+            elif self.toolstat[0] == 1 and self.toolstat[1] == 0:
+                self.toolstat[1] = 1
+                return 1
+            else:
+                return 0
+        elif card.cardtype == "LiW+  ":
+            if self.toolstat[0] == 0 and self.toolstat[2] == 0:
+                tooltype = input("Enter which tool you want to repair(L for lamp, C for mine car): ")
+                if tooltype == "L":
+                    self.toolstat[0] = 1
+                    return 1
+                elif tooltype == "C":
+                    self.toolstat[2] = 1
+                    return 1
+                else:
+                    return 0
+            elif self.toolstat[0] == 0 and self.toolstat[2] == 1:
+                self.toolstat[0] = 1
+                return 1
+            elif self.toolstat[0] == 1 and self.toolstat[2] == 0:
+                self.toolstat[2] = 1
+                return 1
+            else:
+                return 0
+        elif card.cardtype == "PW+   ":
+            if self.toolstat[2] == 0 and self.toolstat[1] == 0:
+                tooltype = input("Enter which tool you want to repair(P for pick, C for mine car): ")
+                if tooltype == "C":
+                    self.toolstat[2] = 1
+                    return 1
+                elif tooltype == "P":
+                    self.toolstat[1] = 1
+                    return 1
+                else:
+                    return 0
+            elif self.toolstat[2] == 0 and self.toolstat[1] == 1:
+                self.toolstat[2] = 1
+                return 1
+            elif self.toolstat[2] == 1 and self.toolstat[1] == 0:
+                self.toolstat[1] = 1
+                return 1
+            else:
+                return 0
         else:
-            print("error, cant play this cation card tools stat not changed")
+            print("error, cant play this aation card, tool stat not changed")
             return 0
         
     def changePoint(self, point):

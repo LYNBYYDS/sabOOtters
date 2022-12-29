@@ -274,7 +274,9 @@ class Interface:
                 self.table[coordY*3+2][coordX+1] = self.cardtable[coordY][coordX+1].getbottom()
                 if self.cardtable[coordY][coordX+1].cardtype == "G     ":
                     self.endgame = 1
-                
+            return 1
+        else: 
+            return 0
             
     def replaceCard(self, card, coordX, coordY):
         

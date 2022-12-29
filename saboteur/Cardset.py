@@ -10,7 +10,7 @@ from Card import *
 class Cardset:
     
     def __init__(self):
-        self.pathcards = [PathCard("URDL+") for x in range(5)]
+        self.pathcards = [PathCard("URDL+ ") for x in range(5)]
 
         # URDL	5	1
         # URD	5	1
@@ -23,26 +23,26 @@ class Cardset:
         # R	    0	1
         # total 40
         for x in range(5):
-            self.pathcards.append(PathCard("URD +"))
+            self.pathcards.append(PathCard("URD + "))
         for x in range(5):
-            self.pathcards.append(PathCard("UR L+"))
+            self.pathcards.append(PathCard("UR L+ "))
         for x in range(5):
-            self.pathcards.append(PathCard("UR  +"))
+            self.pathcards.append(PathCard("UR  + "))
         for x in range(5):
-            self.pathcards.append(PathCard("U  L+"))
+            self.pathcards.append(PathCard("U  L+ "))
         for x in range(5):
-            self.pathcards.append(PathCard("U D +"))
+            self.pathcards.append(PathCard("U D + "))
         for x in range(5):
-            self.pathcards.append(PathCard(" R L+"))
-        self.pathcards.append(PathCard("URDL-"))
-        self.pathcards.append(PathCard("URD -"))
-        self.pathcards.append(PathCard("UR L-"))
-        self.pathcards.append(PathCard("UR  -"))
-        self.pathcards.append(PathCard("U  L-"))
-        self.pathcards.append(PathCard("U D -"))
-        self.pathcards.append(PathCard(" R L-"))
-        self.pathcards.append(PathCard("U   -"))
-        self.pathcards.append(PathCard(" R  -"))
+            self.pathcards.append(PathCard(" R L+ "))
+        self.pathcards.append(PathCard("URDL- "))
+        self.pathcards.append(PathCard("URD - "))
+        self.pathcards.append(PathCard("UR L- "))
+        self.pathcards.append(PathCard("UR  - "))
+        self.pathcards.append(PathCard("U  L- "))
+        self.pathcards.append(PathCard("U D - "))
+        self.pathcards.append(PathCard(" R L- "))
+        self.pathcards.append(PathCard("U   - "))
+        self.pathcards.append(PathCard(" R  - "))
 
         # Li	2	3
         # P	2	3
@@ -53,34 +53,34 @@ class Cardset:
         # MAP	6	
         # RoF	3	 
         
-        self.actioncards = [ActionCard("Li+") for x in range(2)]
+        self.actioncards = [ActionCard("Li+   ") for x in range(2)]
         for x in range(2):
-            self.actioncards.append(ActionCard("P+"))
+            self.actioncards.append(ActionCard("P+    "))
         for x in range(2):
-            self.actioncards.append(ActionCard("W+"))
+            self.actioncards.append(ActionCard("W+    "))
         for x in range(3):
-            self.actioncards.append(ActionCard("Lix"))
+            self.actioncards.append(ActionCard("Lix   "))
         for x in range(3):
-            self.actioncards.append(ActionCard("Px"))
+            self.actioncards.append(ActionCard("Px    "))
         for x in range(3):
-            self.actioncards.append(ActionCard("Wx"))
+            self.actioncards.append(ActionCard("Wx    "))
         for x in range(6):
-            self.actioncards.append(ActionCard("MAP"))
+            self.actioncards.append(ActionCard("MAP   "))
         for x in range(3):
-            self.actioncards.append(ActionCard("RoF"))
-        self.actioncards.append(ActionCard("LiP+"))
-        self.actioncards.append(ActionCard("LiW+"))
-        self.actioncards.append(ActionCard("PW+"))
+            self.actioncards.append(ActionCard("RoF   "))
+        self.actioncards.append(ActionCard("LiP+  "))
+        self.actioncards.append(ActionCard("LiW+  "))
+        self.actioncards.append(ActionCard("PW+   "))
       
         
         # 1G	16	
         # 2G	8	
         # 3G	4	
-        self.goldcards = [GoldCard("1G") for x in range(16)]
+        self.goldcards = [GoldCard("1G    ") for x in range(16)]
         for x in range(8):
-            self.goldcards.append(GoldCard("2G"))
+            self.goldcards.append(GoldCard("2G    "))
         for x in range(4):
-            self.goldcards.append(GoldCard("3G"))
+            self.goldcards.append(GoldCard("3G    "))
       
         
 # 道路牌：	40張
