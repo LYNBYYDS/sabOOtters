@@ -12,7 +12,7 @@ from Card import *
 
 class Player:
     
-    def __init__(self, playername, age, role, nbCard = 6, index = 0, point = 0, toolstat = [1, 1, 1]):
+    def __init__(self, playername, age, role = "GOOD", nbCard = 6, index = 0, point = 0, toolstat = [1, 1, 1]):
         
         self.playername = playername
         self.age = age
@@ -20,6 +20,7 @@ class Player:
         self.nbCard = nbCard
         self.index = index
         self.point = point
+        self.toolstat = toolstat
         self.cardtable = [EmptyCard() for x in range(nbCard)]
         self.table_top = ["          " for x in range(nbCard)]
         self.table_middle = [str(x) + ":      , " for x in range(nbCard)]

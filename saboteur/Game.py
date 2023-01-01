@@ -79,8 +79,27 @@ class Game:
                 for x in range(self.nbplayer):
                     if self.playerlist[x].insertCard(self.cardlist[self.cardlistindex]):
                         self.cardlistindex += 1
-        
-        
+       
+    def inportPlayerInfo(self):
+        while(1):
+            datain = input("How many players are going to play?(Entre a number between 3 and 10): ")
+            if datain.isdigit():
+                nbPlayer = int(datain)
+                if(nbPlayer <= 10 and nbPlayer >= 3):
+                    self.nbplayer = nbPlayer
+                    break
+                
+        for playerindex in range(self.nbplayer):
+            while(1):
+                playername = input("Please entre the " + str(playerindex+1)+ " th player's name(Can not be empty): ")
+                while(not playername):
+                    playername = input("Please entre the " + str(playerindex+1)+ " th player's name(Can not be empty): ")
+                datain = input("Please entre the " + str(playerindex+1)+ " th player's age(Entre a number between 3 and 122): ")
+                while(playerage > 122 or playerage < 3):
+                    playerage = int(input("Please entre the " + str(playerindex+1)+ " th player's age(Entre a number between 3 and 122): "))
+                self.addPlayer(Player(playername, playerage))
+                break
+            
     def startGame(self, nbplayer, listplayer):
         for x in range(nbplayer):
             listplayer[x].resetPlayer(1)
@@ -110,8 +129,9 @@ class Game:
         else: 
             return 0
         
-    def playActionCardRoF(self, playerindex,)   
-        
+    # def playActionCardRoF(self, playerindex,)   
+    
+    
     def takeOneCard(self, playerindex):
         if(playerindex >= self.nbplayer or playerindex < 0):
             print("error, plater index out of range")
@@ -134,23 +154,25 @@ player3 = Player("tutu", 19, "GOOD")
 listplayer = [player1, player2, player3]
 nbplayer = len(listplayer)
 game1 = Game()
-game1.startGame(nbplayer, listplayer)
-game1.interface.printInterface()
+game1.inportPlayerInfo()
 game1.showEveryoneStat()
-while(1):
-    if (int(input("Entre 0 for play an action card, Entre 1 for play a path card"))):
+# game1.startGame(nbplayer, listplayer)
+# game1.interface.printInterface()
+# game1.showEveryoneStat()
+# while(1):
+#     if (int(input("Entre 0 for play an action card, Entre 1 for play a path card"))):
         
-        playerindexinput = int(input("请输入你的玩家号：0-"+str(game1.nbplayer-1)))
-        cardindexinput = int(input("请输入你打的牌号：0-"+str(game1.playerlist[playerindexinput].index-1)))
-        coordXinput = int(input("请输入X坐标："))
-        coordYinput = int(input("请输入Y坐标："))
-        game1.playPathCard(playerindexinput,cardindexinput,coordXinput,coordYinput)
-    else:
-        playerindexinput = int(input("请输入你的玩家号：0-"+str(game1.nbplayer-1)))
-        cardindexinput = int(input("请输入你打的牌号：0-"+str(game1.playerlist[playerindexinput].index-1)))
-        targetindexinput = int(input("请输入你目标的玩家号：0-"+str(game1.nbplayer-1)))
-        game1.playActionToolsCard(playerindexinput,cardindexinput,targetindexinput)
-    game1.interface.printInterface()
-    game1.showEveryoneStat()
+#         playerindexinput = int(input("请输入你的玩家号：0-"+str(game1.nbplayer-1)))
+#         cardindexinput = int(input("请输入你打的牌号：0-"+str(game1.playerlist[playerindexinput].index-1)))
+#         coordXinput = int(input("请输入X坐标："))
+#         coordYinput = int(input("请输入Y坐标："))
+#         game1.playPathCard(playerindexinput,cardindexinput,coordXinput,coordYinput)
+#     else:
+#         playerindexinput = int(input("请输入你的玩家号：0-"+str(game1.nbplayer-1)))
+#         cardindexinput = int(input("请输入你打的牌号：0-"+str(game1.playerlist[playerindexinput].index-1)))
+#         targetindexinput = int(input("请输入你目标的玩家号：0-"+str(game1.nbplayer-1)))
+#         game1.playActionToolsCard(playerindexinput,cardindexinput,targetindexinput)
+#     game1.interface.printInterface()
+#     game1.showEveryoneStat()
 
 
