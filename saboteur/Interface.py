@@ -16,6 +16,7 @@ class Interface:
         self.cardtable = [[EmptyCard() for x in range(self.dimX)] for y in range(self.dimY)]
         self.table = [["     "] * self.dimX for y in range(self.dimY*3)]
         self.endgame = endgame
+        self.endcardtable = []
     
     def printCardtable(self):
         
@@ -110,7 +111,7 @@ class Interface:
         self.table[12][8] = roundendcard2.gettop()
         self.table[13][8] = roundendcard2.getmiddle()
         self.table[14][8] = roundendcard2.getbottom()
-
+        
 
     def insertCard(self, card, coordX, coordY):
         
@@ -302,7 +303,34 @@ class Interface:
             self.table[coordY*3][coordX] = card.gettop()
             self.table[coordY*3+1][coordX] = card.getmiddle()
             self.table[coordY*3+2][coordX] = card.getbottom()
-            
+           
+    def showRoundEndCard(self, card, coordX, coordY):
+        show_aviliable = 0
+        
+        if not(self.cardtable[coordY][coordX].cardtype == "NU    "\
+            or self.cardtable[coordY][coordX].cardtype == "ND    "\
+            or self.cardtable[coordY][coordX].cardtype == "G     "):    
+            print("error, only the end path canbe shown!")
+        else:
+            if card.cardtype != "MAP   ":
+                print("error, only the map card has this fonction!")
+            else:
+                if self.cardtable[coordY][coordX].canturn == 0:
+                    print("error, this card already showed up!")
+                else:
+                    print(self.cardtable[coordY][coordX].backtop)
+                    print(self.cardtable[coordY][coordX].backmiddle)
+                    print(self.cardtable[coordY][coordX].backbottom)
+                    show_aviliable = 1
+      
+        return show_aviliable
+        
+        if replace_aviliable:
+            self.cardtable[coordY][coordX] = card
+            self.table[coordY*3][coordX] = card.gettop()
+            self.table[coordY*3+1][coordX] = card.getmiddle()
+            self.table[coordY*3+2][coordX] = card.getbottom()
+           
             
             
 # test code 

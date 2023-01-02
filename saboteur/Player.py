@@ -80,12 +80,8 @@ class Player:
             return 0
        
     def removeCard(self, index):
-        
-       
         if self.index >= index:
-            
             for i in range(self.index-index-1):
-                
                 self.cardtable[index+i] = self.cardtable[index+i+1]
                 self.table_top[index+i] = self.table_top[index+i+1]
                 self.table_middle[index+i] = str(index+i) + ": " + self.cardtable[index+i+1].getmiddle() + ", "
